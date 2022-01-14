@@ -1,0 +1,45 @@
+PODS:
+  - AFNetworking (4.0.1):
+    - AFNetworking/NSURLSession (= 4.0.1)
+    - AFNetworking/Reachability (= 4.0.1)
+    - AFNetworking/Security (= 4.0.1)
+    - AFNetworking/Serialization (= 4.0.1)
+    - AFNetworking/UIKit (= 4.0.1)
+  - AFNetworking/NSURLSession (4.0.1):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (4.0.1)
+  - AFNetworking/Security (4.0.1)
+  - AFNetworking/Serialization (4.0.1)
+  - AFNetworking/UIKit (4.0.1):
+    - AFNetworking/NSURLSession
+  - LSTPopView (0.3.10):
+    - LSTPopView/Code (= 0.3.10)
+    - LSTTimer
+  - LSTPopView/Code (0.3.10):
+    - LSTTimer
+  - LSTTimer (0.2.10)
+  - Masonry (1.1.0)
+
+DEPENDENCIES:
+  - AFNetworking
+  - LSTPopView
+  - Masonry
+
+SPEC REPOS:
+  trunk:
+    - AFNetworking
+    - LSTPopView
+    - LSTTimer
+    - Masonry
+
+SPEC CHECKSUMS:
+  AFNetworking: 7864c38297c79aaca1500c33288e429c3451fdce
+  LSTPopView: 9379f00f6ce7d1fc620b50ab00ed3ef97b2d4d52
+  LSTTimer: caf8f02ff366ca175cf4c1778d26c166183c1b6f
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+
+PODFILE CHECKSUM: 49f392ee0c78775321ed633feccc51dde01205ea
+
+COCOAPODS: 1.11.2
