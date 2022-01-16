@@ -46,7 +46,7 @@ static NSString * _appID = @"414478124";
         /// 服务器 request后
 //        ZYVersionUpdateModel * model = [ZYVersionUpdateManager testModel];
 //        ZYVersionUpdateView * customView;
-//        [ZYVersionUpdateManager.shared updateComparisonWithModel:model customView:customView  block:^(BOOL success, NSString * _Nonnull msg) {
+//        [ZYVersionUpdateManager updateComparisonWithModel:model customView:customView  block:^(BOOL success, NSString * _Nonnull msg) {
 //            if (!success) {
 //                NSLog(@"%@", msg);
 //            }
