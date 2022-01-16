@@ -7,6 +7,9 @@
 
 #import "SceneDelegate.h"
 #import "ZYVersionUpdateManager.h"
+#import "ZYVersionUpdateView.h"
+
+static NSString * _appID = @"414478124";
 
 @interface SceneDelegate ()
 
@@ -19,25 +22,43 @@
     
     /// 延迟0.5秒 window存在 再加载
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        /// 自定义view
+        ZYVersionUpdateView * view = [[ZYVersionUpdateView alloc] init];
+        view.frame = CGRectMake(0, 0, 250, 300);
+        view.model = [ZYVersionUpdateManager testModel];
+        __weak typeof(view) self_view = view;
+        view.sureBlock = ^{
+            [ZYVersionUpdateManager versionUpdateUrl:self_view.model.url];
+            [ZYVersionUpdateManager dismiss];
+        };
+        view.cancelBlock = ^{
+            [ZYVersionUpdateManager dismiss];
+        };
+
         /// 商店
-        [ZYVersionUpdateManager.shared checkAppStoreVersionUpdate:^(BOOL success, NSString * _Nonnull msg) {
+        [ZYVersionUpdateManager checkAppStoreVersionUpdateWithAppID:_appID force:false customView:view block:^(BOOL success, NSString * _Nonnull msg) {
             if (!success) {
                 NSLog(@"%@", msg);
             }
         }];
         
-        /// 服务器
-//        [ZYVersionUpdateManager.shared checkServiceVersionUpdate:^(BOOL success, NSString * _Nonnull msg) {
+        /// 服务器 request后
+//        ZYVersionUpdateModel * model = [ZYVersionUpdateManager testModel];
+//        ZYVersionUpdateView * customView;
+//        [ZYVersionUpdateManager.shared updateComparisonWithModel:model customView:customView  block:^(BOOL success, NSString * _Nonnull msg) {
 //            if (!success) {
 //                NSLog(@"%@", msg);
 //            }
 //        }];
     });
-
+    
+    
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
 }
+
 
 
 - (void)sceneDidDisconnect:(UIScene *)scene {

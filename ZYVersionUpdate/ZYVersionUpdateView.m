@@ -7,7 +7,11 @@
 //
 
 #import "ZYVersionUpdateView.h"
+#if __has_include(<Masonry/Masonry.h>)
+#import <Masonry.h>
+#else
 #import "Masonry.h"
+#endif
 
 static NSString * cellID = @"cellID";
 

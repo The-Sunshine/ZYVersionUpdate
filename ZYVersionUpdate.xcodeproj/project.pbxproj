@@ -14,9 +14,9 @@
 		22B97FD72790413A00313F83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22B97FD62790413A00313F83 /* Assets.xcassets */; };
 		22B97FDA2790413A00313F83 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22B97FD82790413A00313F83 /* LaunchScreen.storyboard */; };
 		22B97FDD2790413A00313F83 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B97FDC2790413A00313F83 /* main.m */; };
-		22B97FEA2790414B00313F83 /* ZYVersionUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B97FE42790414B00313F83 /* ZYVersionUpdateModel.m */; };
-		22B97FEB2790414B00313F83 /* ZYVersionUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22B97FE52790414B00313F83 /* ZYVersionUpdateManager.m */; };
-		22EEC96327918DB30058726C /* ZYVersionUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EEC96227918DB30058726C /* ZYVersionUpdateView.m */; };
+		22EEC97F2793FAD40058726C /* ZYVersionUpdateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EEC9792793FAD40058726C /* ZYVersionUpdateModel.m */; };
+		22EEC9802793FAD40058726C /* ZYVersionUpdateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EEC97A2793FAD40058726C /* ZYVersionUpdateView.m */; };
+		22EEC9812793FAD40058726C /* ZYVersionUpdateManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 22EEC97B2793FAD40058726C /* ZYVersionUpdateManager.m */; };
 		B468A028483D28509C754371 /* Pods_ZYVersionUpdate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60571B47AC15B2E975D7369E /* Pods_ZYVersionUpdate.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,12 +33,12 @@
 		22B97FD92790413A00313F83 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22B97FDB2790413A00313F83 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22B97FDC2790413A00313F83 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		22B97FE42790414B00313F83 /* ZYVersionUpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYVersionUpdateModel.m; sourceTree = "<group>"; };
-		22B97FE52790414B00313F83 /* ZYVersionUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYVersionUpdateManager.m; sourceTree = "<group>"; };
-		22B97FE72790414B00313F83 /* ZYVersionUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYVersionUpdateManager.h; sourceTree = "<group>"; };
-		22B97FE82790414B00313F83 /* ZYVersionUpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYVersionUpdateModel.h; sourceTree = "<group>"; };
-		22EEC96127918DB30058726C /* ZYVersionUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYVersionUpdateView.h; sourceTree = "<group>"; };
-		22EEC96227918DB30058726C /* ZYVersionUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYVersionUpdateView.m; sourceTree = "<group>"; };
+		22EEC9792793FAD40058726C /* ZYVersionUpdateModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYVersionUpdateModel.m; sourceTree = "<group>"; };
+		22EEC97A2793FAD40058726C /* ZYVersionUpdateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYVersionUpdateView.m; sourceTree = "<group>"; };
+		22EEC97B2793FAD40058726C /* ZYVersionUpdateManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZYVersionUpdateManager.m; sourceTree = "<group>"; };
+		22EEC97C2793FAD40058726C /* ZYVersionUpdateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYVersionUpdateView.h; sourceTree = "<group>"; };
+		22EEC97D2793FAD40058726C /* ZYVersionUpdateModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYVersionUpdateModel.h; sourceTree = "<group>"; };
+		22EEC97E2793FAD40058726C /* ZYVersionUpdateManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZYVersionUpdateManager.h; sourceTree = "<group>"; };
 		4CC59AB25316C9DFCBFE24F0 /* Pods-ZYVersionUpdate.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYVersionUpdate.debug.xcconfig"; path = "Target Support Files/Pods-ZYVersionUpdate/Pods-ZYVersionUpdate.debug.xcconfig"; sourceTree = "<group>"; };
 		60571B47AC15B2E975D7369E /* Pods_ZYVersionUpdate.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ZYVersionUpdate.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDDE31003C46796ADA0B16B0 /* Pods-ZYVersionUpdate.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZYVersionUpdate.release.xcconfig"; path = "Target Support Files/Pods-ZYVersionUpdate/Pods-ZYVersionUpdate.release.xcconfig"; sourceTree = "<group>"; };
@@ -83,7 +83,9 @@
 				22B97FCE2790413700313F83 /* SceneDelegate.m */,
 				22B97FD02790413700313F83 /* ViewController.h */,
 				22B97FD12790413700313F83 /* ViewController.m */,
-				22B97FE32790414B00313F83 /* ZYVersionUpdate */,
+				22EEC97C2793FAD40058726C /* ZYVersionUpdateView.h */,
+				22EEC97A2793FAD40058726C /* ZYVersionUpdateView.m */,
+				22EEC9782793FAD40058726C /* ZYVersionUpdate */,
 				22B97FD32790413700313F83 /* Main.storyboard */,
 				22B97FD62790413A00313F83 /* Assets.xcassets */,
 				22B97FD82790413A00313F83 /* LaunchScreen.storyboard */,
@@ -93,15 +95,13 @@
 			path = ZYVersionUpdate;
 			sourceTree = "<group>";
 		};
-		22B97FE32790414B00313F83 /* ZYVersionUpdate */ = {
+		22EEC9782793FAD40058726C /* ZYVersionUpdate */ = {
 			isa = PBXGroup;
 			children = (
-				22B97FE72790414B00313F83 /* ZYVersionUpdateManager.h */,
-				22B97FE52790414B00313F83 /* ZYVersionUpdateManager.m */,
-				22EEC96127918DB30058726C /* ZYVersionUpdateView.h */,
-				22EEC96227918DB30058726C /* ZYVersionUpdateView.m */,
-				22B97FE82790414B00313F83 /* ZYVersionUpdateModel.h */,
-				22B97FE42790414B00313F83 /* ZYVersionUpdateModel.m */,
+				22EEC97E2793FAD40058726C /* ZYVersionUpdateManager.h */,
+				22EEC97B2793FAD40058726C /* ZYVersionUpdateManager.m */,
+				22EEC97D2793FAD40058726C /* ZYVersionUpdateModel.h */,
+				22EEC9792793FAD40058726C /* ZYVersionUpdateModel.m */,
 			);
 			path = ZYVersionUpdate;
 			sourceTree = "<group>";
@@ -238,12 +238,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				22B97FD22790413700313F83 /* ViewController.m in Sources */,
-				22EEC96327918DB30058726C /* ZYVersionUpdateView.m in Sources */,
 				22B97FCC2790413700313F83 /* AppDelegate.m in Sources */,
+				22EEC9812793FAD40058726C /* ZYVersionUpdateManager.m in Sources */,
+				22EEC97F2793FAD40058726C /* ZYVersionUpdateModel.m in Sources */,
 				22B97FDD2790413A00313F83 /* main.m in Sources */,
-				22B97FEB2790414B00313F83 /* ZYVersionUpdateManager.m in Sources */,
 				22B97FCF2790413700313F83 /* SceneDelegate.m in Sources */,
-				22B97FEA2790414B00313F83 /* ZYVersionUpdateModel.m in Sources */,
+				22EEC9802793FAD40058726C /* ZYVersionUpdateView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

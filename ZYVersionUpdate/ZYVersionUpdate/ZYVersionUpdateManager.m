@@ -7,15 +7,22 @@
 //
 
 #import "ZYVersionUpdateManager.h"
-#import "ZYVersionUpdateModel.h"
-#import "ZYVersionUpdateView.h"
-#import "LSTPopView.h"
-#import <AFNetworking.h>
 
-/// 企业包  "itms-services://?action=download-manifest&url=https://www-test.x.app/download/x.plist"
-static NSString * _appID = @"414478124"; /// 微信id
+#if __has_include(<LSTPopView/LSTPopView.h>)
+#import <LSTPopView.h>
+#else
+#import "LSTPopView.h"
+#endif
+
+#if __has_include(<AFNetworking/AFNetworking.h>)
+#import <AFNetworking.h>
+#else
+#import "AFNetworking.h"
+#endif
 
 @interface ZYVersionUpdateManager()
+
+@property (nonatomic,strong) LSTPopView * popView;
 
 @end
 
@@ -30,9 +37,12 @@ static NSString * _appID = @"414478124"; /// 微信id
     return manager;
 }
 
-- (void)checkAppStoreVersionUpdate:(void(^)(BOOL success,NSString * msg))block {
++ (void)checkAppStoreVersionUpdateWithAppID:(NSString *)appID
+                                      force:(BOOL)force
+                                 customView:(UIView *)customView
+                                      block:(void(^)(BOOL success,NSString * msg))block {
 
-    NSString * url = [NSString stringWithFormat:@"http://itunes.apple.com/cn/lookup?id=%@",_appID];
+    NSString * url = [NSString stringWithFormat:@"http://itunes.apple.com/cn/lookup?id=%@",appID];
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
@@ -44,91 +54,78 @@ static NSString * _appID = @"414478124"; /// 微信id
             return;
         }
         
-        ZYVersionUpdateModel * model = [self testModel]; // [ZYVersionUpdateModel yy_modelWithDictionary:dic];
+        ZYVersionUpdateModel * model = ZYVersionUpdateModel.new;
         model.version = results[0][@"version"];
         model.content = results[0][@"releaseNotes"];
-        model.url = [NSString stringWithFormat:@"https://itunes.apple.com/us/app/id%@?ls=1&mt=8",_appID];
-        
-        [self updateComparisonWithModel:model currentVersion:[self app_version] block:block];
+        model.url = [NSString stringWithFormat:@"https://itunes.apple.com/us/app/id%@?ls=1&mt=8",appID];
+        model.force = force ? @"1" : @"0";
+        [self updateComparisonWithModel:model customView:customView block:block];
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         !block ?: block(false,error.description);
     }];
 }
 
-- (void)checkServiceVersionUpdate:(void(^)(BOOL success,NSString * msg))block {
-    /// request
-    ZYVersionUpdateModel * model = [self testModel]; // [ZYVersionUpdateModel yy_modelWithDictionary:dict];
-    
-    [self updateComparisonWithModel:model currentVersion:[self app_version]  block:block];
-}
-
-- (void)updateComparisonWithModel:(ZYVersionUpdateModel *)model
-                   currentVersion:(NSString *)currentVersion
++ (void)updateComparisonWithModel:(ZYVersionUpdateModel *)model
+                       customView:(UIView *)customView
                             block:(void(^)(BOOL success,NSString * msg))block {
     
-    NSComparisonResult result = [model.version compare:currentVersion options:NSNumericSearch];
+    NSComparisonResult result = [model.version compare:[ZYVersionUpdateManager app_version] options:NSNumericSearch];
     if (result == NSOrderedDescending) {
-        [self showVersionUpdateViewModel:model];
+        [self showVersionUpdateViewModel:model customView:customView];
         !block ?: block(true,nil);
     } else {
         !block ?: block(false,@"当前已是最新版本");
     }
 }
 
-- (void)showVersionUpdateViewModel:(ZYVersionUpdateModel *)model {
-    ZYVersionUpdateView *view = [[ZYVersionUpdateView alloc] init];
-    view.frame = CGRectMake(0, 0, 250, 300);
-    view.model = model;
-    LSTPopView *popView = [LSTPopView initWithCustomView:view parentView:nil popStyle:LSTPopStyleFade dismissStyle:LSTDismissStyleFade];
++ (void)showVersionUpdateViewModel:(ZYVersionUpdateModel *)model
+                        customView:(UIView *)customView {
+
+    LSTPopView * popView = [LSTPopView initWithCustomView:customView
+                                              parentView:nil
+                                                popStyle:LSTPopStyleFade
+                                            dismissStyle:LSTDismissStyleFade];
     popView.priority = 800;
-    LSTPopViewWK(popView)
-    LSTPopViewWK(self)
     popView.bgAlpha = 0.7;
     popView.popDuration = 0.8;
     popView.dismissDuration = 0.8;
     popView.isClickFeedback = YES;
     popView.isHideBg = NO;
     popView.isObserverScreenRotation = YES;
-    view.sureBlock = ^{
-        [wk_self versionUpdateUrl:model.url];
-        [wk_popView dismiss];
-    };
-    view.cancelBlock = ^{
-        [wk_popView dismiss];
-    };
     popView.isClickBgDismiss = !model.force.boolValue;
     [popView pop];
+    ZYVersionUpdateManager.shared.popView = popView;
 }
 
-- (void)versionUpdateUrl:(NSString *)urlString {
++ (void)dismiss {
+    [ZYVersionUpdateManager.shared.popView dismiss];
+}
+
++ (void)versionUpdateUrl:(NSString *)urlString {
+    
     NSURL * url = [NSURL URLWithString:urlString];
-    /// 获取新版本的下载链接
-    if ([UIApplication.sharedApplication canOpenURL:url]) {
-        if (@available(iOS 10, *)) {
-            [UIApplication.sharedApplication openURL: url
-                                             options: @{}
-                                   completionHandler: nil];
-        } else {
-            [UIApplication.sharedApplication openURL:url];
-        }
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            //关闭程序
-            exit(0);
-        });
-    }
+    if (![UIApplication.sharedApplication canOpenURL:url]) return;
+    [UIApplication.sharedApplication openURL: url
+                                     options: @{}
+                           completionHandler: nil];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        //关闭程序
+        exit(0);
+    });
 }
 
-- (NSString *)app_version {
-    return [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];;
-}
-
-- (ZYVersionUpdateModel *)testModel {
++ (ZYVersionUpdateModel *)testModel {
     ZYVersionUpdateModel * model = ZYVersionUpdateModel.new;
     model.url = [NSString stringWithFormat:@"https://itunes.apple.com/us/app/id%@?ls=1&mt=8",@"444934666"];
-    model.version = @"3.0.0";
+    model.version = @"100.0.0";
     model.content = @"最新版本:3.0.0\n新版本大小:10M\n更新内容:test\n测试更新接口";
     model.force = @"0";
     return model;
+}
+
+#pragma mark - private
++ (NSString *)app_version {
+    return [NSBundle.mainBundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];;
 }
 
 @end
