@@ -42,15 +42,14 @@ static NSString * _appID = @"414478124";
                 NSLog(@"%@", msg);
             }
         }];
-        
+
         /// 服务器 request后
-//        ZYVersionUpdateModel * model = [ZYVersionUpdateManager testModel];
-//        ZYVersionUpdateView * customView;
-//        [ZYVersionUpdateManager updateComparisonWithModel:model customView:customView  block:^(BOOL success, NSString * _Nonnull msg) {
-//            if (!success) {
-//                NSLog(@"%@", msg);
-//            }
-//        }];
+        ZYVersionUpdateModel * model = [ZYVersionUpdateManager testModel];
+        [ZYVersionUpdateManager updateComparisonWithModel:model customView:view  block:^(BOOL success, NSString * _Nonnull msg) {
+            if (!success) {
+                NSLog(@"%@", msg);
+            }
+        }];
     });
     
     
